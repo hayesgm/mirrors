@@ -1,7 +1,7 @@
 package mirrors
 
 import (
-  "github.com/hayesgm/dnsimple"
+  "github.com/hayesgm/go-dnsimple/dnsimple"
   "github.com/hayesgm/go-etcd-lock/daemon"
   "net/http"
   "io/ioutil"
@@ -41,8 +41,8 @@ func registerDNS(domain, token string) (err error) {
   log.Println("My ip:",ip)
   
   pre, post := getDomainParts(domain)
-  err = cli.CreateRecord(post, pre, dnsimple.POOL_RECORD, ip, 10, 60) // Okay, this is a good way to register into round-robin
-
+  _, err = cli.CreateRecord(post, pre, dnsimple.POOL_RECORD, ip, 10, 60) // Okay, this is a good way to register into round-robin
+  
   return
 }
 
